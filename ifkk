@@ -1,0 +1,16 @@
+document.getElementById("chat-icon").addEventListener("click", () => {
+  document.getElementById("chat-window").classList.toggle("hidden");
+});
+
+document.getElementById("chat-send").addEventListener("click", async () => {
+  const input = document.getElementById("chat-input");
+  const msg = input.value.trim();
+  if (!msg) return;
+  const box = document.getElementById("chat-messages");
+  box.innerHTML += `<div class="user">${msg}</div>`;
+  input.value = "";
+  const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ msg }) });
+  const data = await res.json();
+  box.innerHTML += `<div class="bot">${data.reply}</div>`;
+  box.scrollTop = box.scrollHeight;
+});
