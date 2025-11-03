@@ -1,0 +1,24 @@
+#!/bin/bash
+echo "🚀 JetTicket AutoDeploy Setup"
+read -p "Enter your email (for Netlify & Render): " EMAIL
+read -p "Enter your Paysera Project ID: " PID
+read -p "Enter your Paysera Sign Password: " PWD
+
+echo "Creating .env files..."
+cat > ../backend/.env <<EOL
+PAYSERA_PROJECT_ID=$PID
+PAYSERA_SIGN_PASSWORD=$PWD
+EMAIL_USER=tickets@jetticket.app
+EMAIL_PASS=YOUR_APP_PASSWORD
+ADMIN_EMAIL=admin@jetticket.app
+ADMIN_PASSWORD=Uliks1234
+EOL
+
+echo "Deploying backend to Render..."
+render deploy backend
+
+echo "Deploying frontend to Netlify..."
+netlify deploy --dir=../frontend
+
+echo "✅ Deployment Complete"
+echo "Check your email for deployment summary."
