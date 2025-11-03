@@ -1,0 +1,7 @@
+<div id="chat-icon">💬</div>
+<div id="chat-window" class="hidden">
+  <div id="chat-header">JetBot Assistant 💬</div>
+  <div id="chat-messages"></div>
+  <input id="chat-input" type="text" placeholder="Ask JetBot anything...">
+  <button id="chat-send">Send</button>
+</div>
