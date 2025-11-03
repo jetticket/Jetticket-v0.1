@@ -1,0 +1,39 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { open } from "sqlite";
+import sqlite3 from "sqlite3";
+import path from "path";
+import cron from "node-cron";
+
+dotenv.config();
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const db = await open({
+  filename: "./backend/db.sqlite",
+  driver: sqlite3.Database,
+});
+
+// Routes
+import authRoutes from "./routes/auth.js";
+import bookingRoutes from "./routes/bookings.js";
+import walletRoutes from "./routes/wallet.js";
+import chatRoutes from "./routes/chat.js";
+import adminRoutes from "./routes/admin.js";
+
+app.use("/api/auth", authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/wallet", walletRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/admin", adminRoutes);
+
+// Daily, monthly, yearly reports at 16:00 Europe/Tirane
+import { sendReports } from "./utils/reports.js";
+cron.schedule("0 16 * * *", () => sendReports("daily"), { timezone: "Europe/Tirane" });
+cron.schedule("0 16 1 * *", () => sendReports("monthly"), { timezone: "Europe/Tirane" });
+cron.schedule("0 16 1 1 *", () => sendReports("yearly"), { timezone: "Europe/Tirane" });
+
+app.listen(8080, () => console.log("✅ JetTicket API running on port 8080"));
