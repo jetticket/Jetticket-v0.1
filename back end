@@ -1,0 +1,47 @@
+JetTicket_v1.0/
+├── backend/
+│   ├── server.js
+│   ├── .env.example
+│   ├── package.json
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── bookings.js
+│   │   ├── wallet.js
+│   │   ├── chat.js
+│   │   ├── admin.js
+│   │   └── paysera.js
+│   ├── utils/
+│   │   ├── email.js
+│   │   ├── multipliers.js
+│   │   ├── priceAPI.js
+│   │   ├── paymentsim.js
+│   │   ├── reports.js
+│   │   ├── cryptoAPI.js
+│   │   ├── faqs.json
+│   │   └── cronJobs.js
+│   ├── db.sqlite
+│   └── seed/seedData.sql
+│
+├── frontend/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── booking.html
+│   ├── wallet.html
+│   ├── admin.html
+│   ├── styles.css
+│   ├── script.js
+│   ├── wallet.js
+│   ├── chatbox.html
+│   ├── chatbox.js
+│   └── buycoins.js
+│
+├── logo/
+│   └── jetticket_plane.svg
+│
+├── setup/
+│   ├── deploy.sh
+│   ├── setup_readme.txt
+│
+├── README.md
+└── LICENSE
